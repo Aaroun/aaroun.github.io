@@ -1,25 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Calculadora de Velocidad Media</title>
+    <title>Calculadora de Velocidad Media en m/min</title>
+  
+  <style>
+    
+     body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para el encabezado */
+h1 {
+    color: #333;
+}
+
+/* Estilo para las etiquetas y campos de entrada */
+label {
+    display: block;
+    margin: 10px 0;
+}
+
+input[type="number"] {
+    padding: 5px;
+    width: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilo para el botón de cálculo */
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el resultado */
+p#resultado {
+    font-weight: bold;
+    margin-top: 10px;
+}
+  
+  </style>
+  
+  
+  
+  
 </head>
 <body>
+  
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
     <h1>Calculadora de Velocidad Media en m/min</h1>
     <label for="distancia">Distancia (en kilómetros):</label>
     <input type="number" id="distancia" step="0.01">
     <br>
     <label for="tiempo">Tiempo (en minutos):</label>
     <input type="number" id="tiempo">
-    <br>
+    <br><br>
     <button onclick="calcularVelocidadMedia()">Calcular Velocidad Media</button>
     <p id="resultado"></p>
+   
   
   
   
   
   
-  
-   <h1>Cronómetro con Cálculo de Metros Recorridos</h1>
+        <h1>Cronómetro con Cálculo de Metros Recorridos</h1>
     <div id="cronometro">00:00</div>
     <div id="metrosRecorridos">0 metros</div>
     <label for="velocidadMediaMMin">Velocidad Media (m/min):</label>
@@ -27,6 +98,7 @@
     <button id="play">Play</button>
     <button id="pause">Pause</button>
     <button id="reset">Reset</button>
+  
   
   
   
@@ -53,6 +125,7 @@
             const distanciaElemento = document.getElementById("distancia");
             const tiempoElemento = document.getElementById("tiempo");
             const resultadoElemento = document.getElementById("resultado");
+            const listaResultadosElemento = document.getElementById("listaResultados");
 
             const distanciaKm = parseFloat(distanciaElemento.value);
             const tiempoMin = parseFloat(tiempoElemento.value);
@@ -63,9 +136,20 @@
             }
 
             const velocidadMediaMMin = calcularVelocidadMediaEnMetrosPorMinuto(distanciaKm, tiempoMin);
-            resultadoElemento.textContent = `La velocidad media es de ${velocidadMediaMMin.toFixed(0)} metros /min.`;
-        }
+            resultadoElemento.textContent = `La velocidad media es de ${velocidadMediaMMin.toFixed(2)} m/min.`;
 
+            // Limpia la lista de resultados anteriores
+            listaResultadosElemento.innerHTML = "";
+
+            // Calcula y muestra los resultados por minuto
+            for (let i = 1; i <= tiempoMin; i++) {
+                const resultadoPorMinuto = velocidadMediaMMin * i;
+                const listItem = document.createElement("li");
+                listItem.textContent = `Minuto ${i}: ${resultadoPorMinuto.toFixed(2)} metros`;
+                listaResultadosElemento.appendChild(listItem);
+            }
+        }
+   
   
   
   
@@ -81,21 +165,14 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
         let cronometroInterval;
         let segundos = 0;
         let minutos = 0;
         let metrosRecorridos = 0;
-        let velocidadMediaMMin = 0;
+        let velocidadMediaMMin ;
 
         const cronometroElemento = document.getElementById("cronometro");
         const metrosRecorridosElemento = document.getElementById("metrosRecorridos");
@@ -105,9 +182,9 @@
         const velocidadMediaElemento = document.getElementById("velocidadMediaMMin");
 
         function iniciarCronometro() {
+          resetearCronometro()
 
-   resetearCronometro() //ponerlo a 0
-            
+
             cronometroInterval = setInterval(function() {
                 segundos++;
                 if (segundos === 60) {
@@ -154,7 +231,7 @@
         }
 
         function actualizarMetrosRecorridos() {
-            metrosRecorridosElemento.textContent = metrosRecorridos.toFixed(0) + " metros";
+            metrosRecorridosElemento.textContent = metrosRecorridos.toFixed(2) + " metros";
         }
 
         playButton.addEventListener("click", iniciarCronometro);
@@ -164,28 +241,13 @@
 
         actualizarCronometro();
         actualizarMetrosRecorridos();
-     </script>
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
+    </script>
   
   
+  
+  
+  
+   <ul id="listaResultados"></ul>
   
   
   
