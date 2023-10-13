@@ -105,6 +105,9 @@
         const velocidadMediaElemento = document.getElementById("velocidadMediaMMin");
 
         function iniciarCronometro() {
+
+   resetearCronometro() //ponerlo a 0
+            
             cronometroInterval = setInterval(function() {
                 segundos++;
                 if (segundos === 60) {
