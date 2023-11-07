@@ -136,7 +136,7 @@ p#resultado {
             }
 
             const velocidadMediaMMin = calcularVelocidadMediaEnMetrosPorMinuto(distanciaKm, tiempoMin);
-            resultadoElemento.textContent = `La velocidad media es de ${velocidadMediaMMin.toFixed(2)} m/min.`;
+            resultadoElemento.textContent = `La velocidad media es de ${velocidadMediaMMin.toFixed(0)} m/min.`;
 
             // Limpia la lista de resultados anteriores
             listaResultadosElemento.innerHTML = "";
@@ -145,7 +145,7 @@ p#resultado {
             for (let i = 1; i <= tiempoMin; i++) {
                 const resultadoPorMinuto = velocidadMediaMMin * i;
                 const listItem = document.createElement("li");
-                listItem.textContent = `Minuto ${i}: ${resultadoPorMinuto.toFixed(2)} metros`;
+                listItem.textContent = `Minuto ${i}: ${resultadoPorMinuto.toFixed(0)} metros`;
                 listaResultadosElemento.appendChild(listItem);
             }
         }
